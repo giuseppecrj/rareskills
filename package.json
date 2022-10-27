@@ -1,0 +1,15 @@
+{
+  "name": "rareskills",
+  "packageManager": "yarn@3.2.4",
+  "scripts": {
+    "solhint": "solhint -f table src/**/*.sol",
+    "prettier:solidity": "prettier --write src/**/*.sol"
+  },
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.24",
+    "solhint": "^3.3.7",
+    "solhint-plugin-prettier": "^0.0.5"
+  }
+}
