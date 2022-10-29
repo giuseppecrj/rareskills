@@ -48,8 +48,7 @@ contract TokenWithBondingCurve is Token {
       "TokenWithBondingCurve: not enough ether"
     );
 
-    _transfer(msg.sender, address(this), tokenAmount);
-    _burn(address(this), tokenAmount);
+    _burn(msg.sender, tokenAmount);
 
     // solhint-disable-next-line avoid-low-level-calls
     (bool sent, ) = msg.sender.call{value: ethAmount}("");
