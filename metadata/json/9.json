@@ -1,0 +1,19 @@
+{
+  "name": "Fakedenza",
+  "description": "A homage to Tyler Hobbs and the fidenza project",
+  "image": "ipfs://bafybeib5zsrn3f7nirvw7qoo3j2lcgtz5swpc5d4cngizjbrrkinvgvjhu/9.png",
+  "attributes": [
+    {
+      "trait_type": "Primary Color",
+      "value": "Beige"
+    },
+    {
+      "trait_type": "Secondary Color",
+      "value": "Brown"
+    },
+    {
+      "trait_type": "Orientation",
+      "value": "Vertical"
+    }
+  ]
+}
