@@ -1,20 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "openzeppelin-contracts/token/ERC20/IERC20.sol";
-import "openzeppelin-contracts/token/ERC20/utils/SafeERC20.sol";
 import "openzeppelin-contracts/token/ERC721/IERC721.sol";
 import "openzeppelin-contracts/security/ReentrancyGuard.sol";
 
-contract ERC721Staking is ReentrancyGuard {
-  using SafeERC20 for IERC20;
+import {Token} from "./Token.sol";
 
+contract ERC721Staking is ReentrancyGuard {
   // Interfaces for ERC20 and ERC721
-  IERC20 public immutable rewardsToken;
+  Token public immutable rewardsToken;
   IERC721 public immutable nftCollection;
 
   // Constructor function to set the rewards token and the NFT collection addresses
-  constructor(IERC721 _nftCollection, IERC20 _rewardsToken) {
+  constructor(IERC721 _nftCollection, Token _rewardsToken) {
     nftCollection = _nftCollection;
     rewardsToken = _rewardsToken;
   }
@@ -142,7 +140,8 @@ contract ERC721Staking is ReentrancyGuard {
     require(rewards > 0, "You have no rewards to claim");
     stakers[msg.sender].timeOfLastUpdate = block.timestamp;
     stakers[msg.sender].unclaimedRewards = 0;
-    rewardsToken.safeTransfer(msg.sender, rewards);
+    // rewardsToken.safeTransfer(msg.sender, rewards);
+    rewardsToken.mint(msg.sender, rewards);
   }
 
   //////////
