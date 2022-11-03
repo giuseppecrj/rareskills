@@ -5,6 +5,7 @@ import "openzeppelin-contracts/token/ERC721/IERC721.sol";
 import "openzeppelin-contracts/security/ReentrancyGuard.sol";
 
 import {Token} from "./Token.sol";
+import {DataTypes} from "./library/DataTypes.sol";
 
 contract ERC721Staking is ReentrancyGuard {
   // Interfaces for ERC20 and ERC721
@@ -17,29 +18,11 @@ contract ERC721Staking is ReentrancyGuard {
     rewardsToken = _rewardsToken;
   }
 
-  struct StakedToken {
-    address staker;
-    uint256 tokenId;
-  }
-
-  // Staker info
-  struct Staker {
-    // Amount of tokens staked by the staker
-    uint256 amountStaked;
-    // Staked token ids
-    StakedToken[] stakedTokens;
-    // Last time of the rewards were calculated for this user
-    uint256 timeOfLastUpdate;
-    // Calculated, but unclaimed rewards for the User. The rewards are
-    // calculated each time the user writes to the Smart Contract
-    uint256 unclaimedRewards;
-  }
-
   // Rewards per hour per token deposited in wei.
   uint256 private rewardsPerHour = 416666666666666666;
 
   // Mapping of User Address to Staker info
-  mapping(address => Staker) public stakers;
+  mapping(address => DataTypes.Staker) public stakers;
 
   // Mapping of Token Id to staker. Made for the SC to remember
   // who to send back the ERC721 Token to.
@@ -65,8 +48,11 @@ contract ERC721Staking is ReentrancyGuard {
     // Transfer the token from the wallet to the Smart contract
     nftCollection.transferFrom(msg.sender, address(this), _tokenId);
 
-    // Create StakedToken
-    StakedToken memory stakedToken = StakedToken(msg.sender, _tokenId);
+    // Create DataTypes.StakedToken
+    DataTypes.StakedToken memory stakedToken = DataTypes.StakedToken(
+      msg.sender,
+      _tokenId
+    );
 
     // Add the token to the stakedTokens array
     stakers[msg.sender].stakedTokens.push(stakedToken);
@@ -157,14 +143,15 @@ contract ERC721Staking is ReentrancyGuard {
   function getStakedTokens(address _user)
     public
     view
-    returns (StakedToken[] memory)
+    returns (DataTypes.StakedToken[] memory)
   {
     // Check if we know this user
     if (stakers[_user].amountStaked > 0) {
       // Return all the tokens in the stakedToken Array for this user that are not -1
-      StakedToken[] memory _stakedTokens = new StakedToken[](
-        stakers[_user].amountStaked
-      );
+      DataTypes.StakedToken[]
+        memory _stakedTokens = new DataTypes.StakedToken[](
+          stakers[_user].amountStaked
+        );
       uint256 _index = 0;
 
       for (uint256 j = 0; j < stakers[_user].stakedTokens.length; j++) {
@@ -178,7 +165,7 @@ contract ERC721Staking is ReentrancyGuard {
     }
     // Otherwise, return empty array
     else {
-      return new StakedToken[](0);
+      return new DataTypes.StakedToken[](0);
     }
   }
 
