@@ -3,6 +3,7 @@
 - [x] An NFT on OpenSea. Create an ERC721 NFT that can be minted for free and has a collection of 10 items with traits and pictures. It should work on OpenSea per the tutorial. Use goerli or polygon for gas savings. Make sure I can mint your NFT from etherscan! You can follow the above tutorial to accomplish this
 
   - https://goerli.etherscan.io/address/0xc300B6b14b5e17F1D93637E74718D3c1266296f7
+  - https://testnets.opensea.io/collection/fakedenza
 
 - [x] ERC721 NFT with staking. You must create 3 separate smart contracts:
 
