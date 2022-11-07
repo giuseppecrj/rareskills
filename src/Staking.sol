@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+// SPDX-License-Identifier: Apache-2.0
+pragma solidity 0.8.17;
 
 import "openzeppelin-contracts/token/ERC721/IERC721.sol";
 import "openzeppelin-contracts/security/ReentrancyGuard.sol";
@@ -19,6 +19,7 @@ contract ERC721Staking is ReentrancyGuard {
   }
 
   // Rewards per hour per token deposited in wei.
+  // 10 tokens / 24 hours = 0.4166666666666666666666666667 tokens per hour
   uint256 private rewardsPerHour = 416666666666666666;
 
   // Mapping of User Address to Staker info
