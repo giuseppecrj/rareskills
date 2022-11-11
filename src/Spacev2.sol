@@ -7,6 +7,7 @@ import {UUPSUpgradeable} from "openzeppelin-contracts-upgradeable/proxy/utils/UU
 
 contract Spacev2 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
   string public name;
+  string public description;
 
   function initialize(string memory _name) public initializer {
     __Ownable_init();
@@ -17,7 +18,7 @@ contract Spacev2 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
 
   function _authorizeUpgrade(address) internal override onlyOwner {}
 
-  function setName(string memory _name) public {
-    name = _name;
+  function setDescription(string memory _desc) public {
+    description = _desc;
   }
 }
