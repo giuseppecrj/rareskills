@@ -13,3 +13,6 @@
 [submodule "lib/OZ-Upgradeable-Foundry"]
 	path = lib/OZ-Upgradeable-Foundry
 	url = https://github.com/jordaniza/OZ-Upgradeable-Foundry
+[submodule "lib/council"]
+	path = lib/council
+	url = https://github.com/element-fi/council
