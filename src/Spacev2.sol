@@ -17,7 +17,7 @@ contract Spacev2 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
 
   function _authorizeUpgrade(address) internal override onlyOwner {}
 
-  function setName(string memory _name) public onlyOwner {
+  function setName(string memory _name) public {
     name = _name;
   }
 }
