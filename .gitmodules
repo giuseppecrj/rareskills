@@ -16,3 +16,6 @@
 [submodule "lib/foundry-upgrades"]
 	path = lib/foundry-upgrades
 	url = https://github.com/odyslam/foundry-upgrades
+[submodule "lib/OZ-Upgradeable-Foundry"]
+	path = lib/OZ-Upgradeable-Foundry
+	url = https://github.com/jordaniza/OZ-Upgradeable-Foundry
