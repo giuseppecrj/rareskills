@@ -1,6 +1,8 @@
 council/=lib/council/contracts/
 ds-test/=lib/forge-std/lib/ds-test/src/
 forge-std/=lib/forge-std/src/
+foundry-upgrades/=lib/foundry-upgrades/src/
 openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/
 openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/
+openzeppelin/=lib/foundry-upgrades/lib/openzeppelin-contracts/contracts/
 solmate/=lib/solmate/src/

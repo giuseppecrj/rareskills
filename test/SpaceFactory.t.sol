@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
 
-import {ProxyTester} from "foundry-upgrades/ProxyTester.sol";
 import {SpaceFactory} from "../src/SpaceFactory.sol";
 import {Space} from "../src/Space.sol";
 import {Spacev2} from "../src/Spacev2.sol";
