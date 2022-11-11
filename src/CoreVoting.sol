@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.0;
 
+import {console} from "forge-std/console.sol";
 import {ICoreVoting} from "council/interfaces/ICoreVoting.sol";
 import {Authorizable} from "council/libraries/Authorizable.sol";
 import {ReentrancyBlock} from "council/libraries/ReentrancyBlock.sol";
@@ -189,6 +190,11 @@ contract CoreVoting is Authorizable, ReentrancyBlock, ICoreVoting {
     uint256 proposalId,
     DataTypes.Ballot ballot
   ) public returns (uint256) {
+    require(
+      votingVaults.length == extraVaultData.length,
+      "CoreVoting: length mismatch"
+    );
+
     require(
       proposals[proposalId].created != 0,
       "CoreVoting: proposal not exists"
