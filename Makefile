@@ -5,7 +5,7 @@
 all: clean remove install update build
 
 # Clean the repo
-clean  :; forge clean
+clean  :; forge clean && yarn hardhat clean
 
 # Remappings
 remap :; forge remappings > remappings.txt
@@ -26,10 +26,9 @@ snapshot :; forge snapshot
 
 slither :; slither ./src
 
-format :; prettier --write src/**/*.sol && prettier --write src/*.sol
+format :; yarn prettier --write src/**/*.sol && yarn prettier --write src/*.sol
 
-# solhint should be installed globally
-lint :; solhint src/**/*.sol && solhint src/*.sol
+lint :; yarn solhint src/**/*.sol
 
 anvil :; anvil -m 'test test test test test test test test test test test junk'
 

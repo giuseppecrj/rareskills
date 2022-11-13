@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity ^0.8.0;
+pragma solidity 0.8.17;
 
 import {console} from "forge-std/console.sol";
 import "./Token.sol";
@@ -23,41 +23,32 @@ contract TokenWithBondingCurve is Token {
     _mint(address(this), msg.value);
     tokenAmount = msg.value.mul(totalSupply()).div(poolBalance);
 
-    require(
-      tokenAmount <= balanceOf(address(this)),
-      "TokenWithBondingCurve: not enough tokens"
-    );
+    require(tokenAmount <= balanceOf(address(this)), "TokenWithBondingCurve: not enough tokens");
 
     _transfer(address(this), msg.sender, tokenAmount);
   }
 
   function sellTokens(uint256 tokenAmount) external {
     require(tokenAmount > 0, "TokenWithBondingCurve: incorrect amount");
-    require(
-      balanceOf(msg.sender) >= tokenAmount,
-      "TokenWithBondingCurve: not enough tokens"
-    );
+    require(balanceOf(msg.sender) >= tokenAmount, "TokenWithBondingCurve: not enough tokens");
 
     uint256 ethAmount = tokenAmount.div(totalSupply()).div(100).mul(90);
     uint256 ethFee = tokenAmount.div(totalSupply()).div(100).mul(10);
 
     fees = fees.add(ethFee);
 
-    require(
-      address(this).balance >= ethAmount,
-      "TokenWithBondingCurve: not enough ether"
-    );
+    require(address(this).balance >= ethAmount, "TokenWithBondingCurve: not enough ether");
 
     _burn(msg.sender, tokenAmount);
 
     // solhint-disable-next-line avoid-low-level-calls
-    (bool sent, ) = msg.sender.call{value: ethAmount}("");
+    (bool sent,) = msg.sender.call{value: ethAmount}("");
     require(sent, "TokenWithBondingCurve: failed to send");
   }
 
   function withdraw() external onlyOwner {
     // solhint-disable-next-line avoid-low-level-calls
-    (bool sent, ) = msg.sender.call{value: fees}("");
+    (bool sent,) = msg.sender.call{value: fees}("");
     require(sent, "TokenWithBondingCurve: failed to send");
   }
 }

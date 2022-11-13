@@ -1,0 +1,18 @@
+{
+  "filter_paths": "lib",
+  "detectors_to_run": "reentrancy-eth,reentrancy-no-eth,reentrancy-unlimited-gas",
+  "solc_remaps": [
+    "@oz-upgradeable/=lib/OZ-Upgradeable-Foundry/lib/openzeppelin-contracts-upgradeable/contracts/",
+    "@oz/=lib/OZ-Upgradeable-Foundry/lib/openzeppelin-contracts/contracts/",
+    "@std/=lib/OZ-Upgradeable-Foundry/lib/forge-std/src/",
+    "OZ-Upgradeable-Foundry/=lib/OZ-Upgradeable-Foundry/src/",
+    "chainlink-brownie-contracts/=lib/chainlink-brownie-contracts/contracts/src/v0.8/dev/vendor/@arbitrum/nitro-contracts/src/",
+    "ds-test/=lib/forge-std/lib/ds-test/src/",
+    "eth-gas-reporter/=node_modules/eth-gas-reporter/",
+    "forge-std/=lib/forge-std/src/",
+    "hardhat/=node_modules/hardhat/",
+    "openzeppelin-contracts-upgradeable/=lib/OZ-Upgradeable-Foundry/lib/openzeppelin-contracts-upgradeable/",
+    "openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/",
+    "solmate/=lib/solmate/src/"
+  ]
+}

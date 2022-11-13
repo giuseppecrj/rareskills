@@ -1,5 +1,5 @@
 [profile.default]
-src = 'src'
+src = 'contracts'
 out = 'out'
 test = 'src/unit'
 libs = ['lib', "node_modules"]
@@ -12,5 +12,9 @@ goerli = "${GOERLI_RPC_URL}"
 
 [etherscan]
 goerli = { key = "${ETHERSCAN_API_KEY}" }
+
+[fmt]
+tab_width = 2
+
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
