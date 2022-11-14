@@ -2,24 +2,27 @@
 pragma solidity 0.8.17;
 
 import {console} from "forge-std/console.sol";
-import "./TokenWithGodMode.sol";
+import {TokenWithGodMode} from "./TokenWithGodMode.sol";
 import "openzeppelin-contracts/utils/math/SafeMath.sol";
 
 contract TokenWithSale is TokenWithGodMode {
-  using SafeMath for uint256;
-
   uint256 internal _tokensPerEth = 10_000;
 
-  constructor(string memory name, string memory symbol) TokenWithGodMode(name, symbol) {
-    _mint(address(this), 22_000_000 * 10 ** decimals());
+  constructor(string memory name, string memory symbol)
+    TokenWithGodMode(name, symbol)
+  {
+    _mint(address(this), 22_000_000 * 10**decimals());
   }
 
   function buyTokens() external payable returns (uint256 tokenAmount) {
     require(msg.value > 0, "TokenWithSale: incorrect amount");
 
-    tokenAmount = msg.value.mul(_tokensPerEth);
+    tokenAmount = msg.value * _tokensPerEth;
 
-    require(tokenAmount <= balanceOf(address(this)), "TokenWithSale: not enough tokens");
+    require(
+      tokenAmount <= balanceOf(address(this)),
+      "TokenWithSale: not enough tokens"
+    );
 
     _transfer(address(this), msg.sender, tokenAmount);
   }
@@ -27,20 +30,23 @@ contract TokenWithSale is TokenWithGodMode {
   function sellTokens(uint256 tokenAmount) external {
     require(tokenAmount > 0, "TokenWithSale: incorrect amount");
 
-    uint256 ethAmount = tokenAmount.div(_tokensPerEth).div(100).mul(90);
+    uint256 ethAmount = ((tokenAmount / _tokensPerEth) / 100) * 90;
 
-    require(address(this).balance >= ethAmount, "TokenWithSale: not enough ether");
+    require(
+      address(this).balance >= ethAmount,
+      "TokenWithSale: not enough ether"
+    );
 
     _transfer(msg.sender, address(this), tokenAmount);
 
     // solhint-disable-next-line avoid-low-level-calls
-    (bool sent,) = msg.sender.call{value: ethAmount}("");
+    (bool sent, ) = msg.sender.call{value: ethAmount}("");
     require(sent, "TokenWithSale: failed to send");
   }
 
   function withdraw() external onlyOwner {
     // solhint-disable-next-line avoid-low-level-calls
-    (bool sent,) = msg.sender.call{value: address(this).balance}("");
+    (bool sent, ) = msg.sender.call{value: address(this).balance}("");
     require(sent, "TokenWithSale: failed to send");
   }
 }

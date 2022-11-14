@@ -32,6 +32,11 @@ lint :; yarn solhint src/**/*.sol
 
 anvil :; anvil -m 'test test test test test test test test test test test junk'
 
+coverage :;
+	forge coverage --report lcov
+	lcov --remove lcov.info -o lcov.info 'test/*' 'script/*' --rc lcov_branch_coverage=1
+	genhtml lcov.info -o reports --branch-coverage
+
 # use the "@" to hide the command from your shell
 deploy-goerli :; @forge script script/${contract}.s.sol:Deploy${contract} --rpc-url ${GOERLI_RPC_URL}  --private-key ${PRIVATE_KEY} --broadcast --verify --etherscan-api-key ${ETHERSCAN_API_KEY}  -vvvv
 
