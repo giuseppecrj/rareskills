@@ -135,14 +135,15 @@ contract TokenWithStakingTest is Test {
     staking.getStakedTokens(bob);
 
     // Check alice's staked tokens
-    DataTypes.StakedToken[] memory aliceStakedTokens = staking.getStakedTokens(
-      alice
-    );
-
-    assertEq(aliceStakedTokens.length, 0);
+    staking.getStakedTokens(alice);
 
     // Bob unstakes NFT
     vm.prank(bob);
-    staking.withdraw(0);
+    staking.withdraw(1);
+
+    DataTypes.StakedToken[] memory stakedTokens = staking.getStakedTokens(bob);
+
+    assertEq(stakedTokens.length, 1);
+    assertEq(stakedTokens[0].tokenId, 0);
   }
 }

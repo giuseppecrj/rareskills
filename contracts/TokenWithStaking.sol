@@ -90,10 +90,7 @@ contract TokenWithStaking is ReentrancyGuard {
     uint256 len = stakers[staker].stakedTokens.length;
 
     for (uint256 i = 0; i < len; ) {
-      if (
-        stakers[staker].stakedTokens[i].tokenId == _tokenId &&
-        stakers[staker].stakedTokens[i].staker != address(0)
-      ) {
+      if (stakers[staker].stakedTokens[i].tokenId == _tokenId) {
         stakers[staker].stakedTokens[i] = stakers[staker].stakedTokens[len - 1];
       }
 
