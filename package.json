@@ -3,7 +3,7 @@
   "packageManager": "yarn@3.2.4",
   "scripts": {
     "solhint": "solhint -f table src/**/*.sol",
-    "prettier:solidity": "prettier --write src/**/*.sol"
+    "prettier:solidity": "prettier --write ./src"
   },
   "devDependencies": {
     "husky": "^8.0.1",
