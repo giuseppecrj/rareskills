@@ -5,6 +5,8 @@ libs = ['lib', "node_modules"]
 gas_reports = ["*"]
 optimizer = true
 optimizer_runs = 20000
+fs_permissions = [{ access = "read-write", path = "./"}]
+
 
 [rpc_endpoints]
 goerli = "${GOERLI_RPC_URL}"
