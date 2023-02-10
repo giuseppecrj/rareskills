@@ -8,5 +8,7 @@ const { MakeMinty } = require("./minty");
     description: "A simple description",
   });
 
+  console.log(response);
+
   console.log(await minty.getNFTMetadata(response.tokenId));
 })();

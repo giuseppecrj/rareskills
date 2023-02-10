@@ -14,11 +14,6 @@ contract Minty is ERC721URIStorage {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
 
-  //types (variables, structs, enums)
-  //state (mappings, arrays)
-  //modifier
-  //fallback
-
   constructor() ERC721("Minty", "MINTY") {}
 
   //functions
